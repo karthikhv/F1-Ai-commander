@@ -1,0 +1,14 @@
+[POSITIVE]
+Hyper-realistic futuristic Formula 1 mission control room, full-scale digital twin F1 car on holographic racetrack platform, layered neural network architectures around the car, deep learning pipelines, convolutional feature maps, recurrent sequence loops, attention links, glowing interconnected nodes and edges, real-time telemetry streams flowing into network, tire temperature, speed, aerodynamics, fuel usage, lap times, sector deltas, brake temps, ERS deployment, predictive dashboards for race strategy optimization, pit stop timing, tire degradation forecast, overtaking probability heatmap, transparent holographic UI, cinematic volumetric lighting, dark graphite interior, neon blue red green accents, physically based rendering, ray-traced reflections, depth of field, ultra-detailed, sharp focus, professional product visualization, clean composition, premium tech presentation quality
+
+[NEGATIVE]
+Use prompts/negative_prompt.txt
+
+[RECOMMENDED SETTINGS]
+- Aspect ratio: 16:9
+- Resolution seed pass: 1344x768 or 1536x864
+- Steps: 40 to 55
+- CFG: 6.5 to 8.0
+- Sampler: DPM++ 2M Karras
+- Hires or upscale pass to 8K final (7680x4320)
+- Denoise in upscale pass: 0.2 to 0.35

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>F1 Neural Analytics Control Room</title>
+    <meta
+      name="description"
+      content="Production-grade visualization of a Formula 1 neural race analytics system."
+    />
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="scene-canvas" aria-label="F1 neural analytics visualization"></canvas>
+
+      <header class="topbar glass">
+        <div class="brand">
+          <span class="dot"></span>
+          <h1>F1 AI Race Intelligence Command Center</h1>
+        </div>
+        <div class="topbar-actions">
+          <div class="meta-chip" id="sim-count">108 Simulations Running</div>
+          <div class="meta-chip" id="mlops">Model v2.3 LIVE | Latency 12ms</div>
+          <label class="mode-select-wrap" for="perf-mode">GPU</label>
+          <select id="perf-mode" aria-label="GPU performance mode">
+            <option value="high" selected>High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
+      </header>
+
+      <main class="layout">
+        <aside class="zone left glass">
+          <h2>Telemetry</h2>
+          <div id="telemetry-groups"></div>
+        </aside>
+
+        <section class="zone center glass">
+          <h2>Interactive Neural Network</h2>
+          <p class="hero-subtitle">Live data pulses through telemetry inputs, sequence models, and strategy outputs.</p>
+          <div id="nn-graph" aria-hidden="true"></div>
+          <div class="hero-overlay">
+            <div class="path-badge" id="active-path">Active Path: Plan B</div>
+            <ul id="nn-labels"></ul>
+          </div>
+        </section>
+
+        <aside class="zone right glass">
+          <h2>Decisions & Strategy</h2>
+          <div id="decision-cards"></div>
+
+          <section class="explainability">
+            <h3>Why this decision?</h3>
+            <ul id="explainability-list"></ul>
+          </section>
+
+          <section class="strategy-state">
+            <h3>Plan Status</h3>
+            <div class="state-pill" id="system-status">Plan B ACTIVE | Pit Window: Lap 24-26</div>
+          </section>
+
+          <section class="strategy-state">
+            <h3>Smart Alerts</h3>
+            <div class="floating-alerts" id="alert-list"></div>
+          </section>
+        </aside>
+      </main>
+
+      <section class="timeline-strip glass">
+        <h2>Race Timeline</h2>
+        <canvas id="timeline-canvas" width="1280" height="120" aria-label="Race timeline"></canvas>
+      </section>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
