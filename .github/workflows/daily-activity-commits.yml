@@ -1,0 +1,57 @@
+name: Daily Activity Commits
+
+on:
+  schedule:
+    # 20:00 UTC => 22:00 Europe/Berlin during CEST (summer)
+    - cron: "0 20 * * *"
+    # 21:00 UTC => 22:00 Europe/Berlin during CET (winter)
+    - cron: "0 21 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  commit-activity:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Ensure run is at 22:00 Berlin
+        id: time_check
+        shell: bash
+        run: |
+          berlin_hour="$(TZ=Europe/Berlin date +%H)"
+          if [ "$berlin_hour" != "22" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Not 22:00 Berlin now (hour=$berlin_hour). Skipping."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Configure git identity
+        if: steps.time_check.outputs.skip == 'false'
+        shell: bash
+        run: |
+          git config user.name "${{ github.repository_owner }}"
+          git config user.email "${{ github.repository_owner }}@users.noreply.github.com"
+
+      - name: Create 8 empty commits
+        if: steps.time_check.outputs.skip == 'false'
+        shell: bash
+        run: |
+          stamp="$(TZ=Europe/Berlin date '+%Y-%m-%d %H:%M:%S %Z')"
+          for i in 1 2 3 4 5 6 7 8; do
+            git commit --allow-empty -m "chore: daily activity $i/8 ($stamp)"
+          done
+
+      - name: Push commits
+        if: steps.time_check.outputs.skip == 'false'
+        shell: bash
+        run: |
+          git pull --rebase origin main
+          git push origin main
